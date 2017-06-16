@@ -58,6 +58,7 @@ describe('function computeTokens', () => {
   })
 })
 
+
 describe('function addOperationToken', () => {
   const testAddOperationToken = tester.bind(compute.addOperationToken)
   const testAddOperationTokenNotChanged = (t, ts) => testAddOperationToken(t, ts, ts)
@@ -79,6 +80,7 @@ describe('function addOperationToken', () => {
     testAddOperationTokenNotChanged('+', ['42', '*'])
   })
 })
+
 
 describe('function addNumberToken', () => {
   const testAddNumberToken = tester.bind(compute.addNumberToken)
@@ -117,6 +119,7 @@ describe('function addNumberToken', () => {
   })
 })
 
+
 describe('function undo', () => {
   const testUndo = tester.bind(compute.undo)
 
@@ -131,6 +134,7 @@ describe('function undo', () => {
 
   testUndo(['-1'], [])
 })
+
 
 describe('function addDot', () => {
   const testAddDot = tester.bind(compute.addDot)
