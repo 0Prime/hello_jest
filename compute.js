@@ -10,7 +10,9 @@ const tools = (() => {
   }
 })()
 
+
 const pipe = tools.pipe
+
 
 const backend = pipe(tools,
   ({ pipe, last, changeLastElementTo }) => {
