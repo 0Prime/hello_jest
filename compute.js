@@ -29,7 +29,9 @@ const backend = pipe(tools,
     const computeTokens = ([a, operator, b, ...rest]) =>
       !a ? 0 :
       !b ? Number(a) :
-      computeTokens([operations[operator](Number(a), Number(b)), ...rest])
+      pipe(operations[operator],
+        operation => operation(Number(a), Number(b)),
+        result => computeTokens([result, ...rest]))
 
 
     const addOperationToken = (t, ts) =>
