@@ -1,12 +1,18 @@
 const tools = (() => {
-  const last = xs => xs[xs.length - 1]
-  const pipe = (x, f, ...fs) => f ? pipe(f(x), ...fs) : x
+  const last = xs => xs[xs.length - 1]  
+  
   const changeLastElementTo = (e, xs) => xs.slice(0, -1).concat(e)
 
+  const compose = (...fs) =>
+    fs.reduce((prevFn, nextFn) => x => nextFn(prevFn(x)),
+              x => x)
+  
+  const pipe = (x, ...fs) => compose(...fs)(x)
+
   return {
-    last: last,
-    pipe: pipe,
-    changeLastElementTo: changeLastElementTo
+    last,
+    pipe,
+    changeLastElementTo
   }
 })()
 
@@ -68,12 +74,12 @@ const backend = pipe(tools,
         ts : changeLastElementTo(pipe(t, Number, x => -x, String), ts))
 
     return {
-      computeTokens: computeTokens,
-      addNumberToken: addNumberToken,
-      addOperationToken: addOperationToken,
-      undo: undo,
-      addDot: addDot,
-      flipSign: flipSign
+      computeTokens,
+      addNumberToken,
+      addOperationToken,
+      undo,
+      addDot,
+      flipSign
     }
   })
 
@@ -125,7 +131,7 @@ const frontend = pipe([tools, backend],
       tokenUpdater(() => ['0'])()
     }
 
-    return { init: init }
+    return { init }
   })
 
 

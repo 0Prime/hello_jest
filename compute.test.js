@@ -1,9 +1,8 @@
-const compute = require('./compute')
+import { computeTokens, addOperationToken, addNumberToken, undo, addDot, flipSign } from './compute';
 
 
 describe('function computeTokens', () => {
-  const computeTokens = compute.computeTokens
-  const testComputeTokens = tester.bind(compute.computeTokens)
+  const testComputeTokens = tester.bind(computeTokens)
 
   test('returns a number', () =>
     expect(typeof computeTokens([])).toBe('number'))
@@ -60,7 +59,7 @@ describe('function computeTokens', () => {
 
 
 describe('function addOperationToken', () => {
-  const testAddOperationToken = tester.bind(compute.addOperationToken)
+  const testAddOperationToken = tester.bind(addOperationToken)
   const testAddOperationTokenNotChanged = (t, ts) => testAddOperationToken(t, ts, ts)
 
   describe('given empty tokens array', () => {
@@ -83,8 +82,7 @@ describe('function addOperationToken', () => {
 
 
 describe('function addNumberToken', () => {
-  const testAddNumberToken = tester.bind(compute.addNumberToken)
-  const testAddNumberTokenNotChanged = (t, ts) => testAddNumberToken(t, ts, ts)
+  const testAddNumberToken = tester.bind(addNumberToken)  
 
   describe('empty tokens array accepts any number tokens', () => {
     testAddNumberToken('0', [], ['0'])
@@ -121,7 +119,7 @@ describe('function addNumberToken', () => {
 
 
 describe('function undo', () => {
-  const testUndo = tester.bind(compute.undo)
+  const testUndo = tester.bind(undo)
 
   testUndo([], [])
   testUndo(['1'], [])
@@ -137,7 +135,7 @@ describe('function undo', () => {
 
 
 describe('function addDot', () => {
-  const testAddDot = tester.bind(compute.addDot)
+  const testAddDot = tester.bind(addDot)
   const testAddDotNotChanged = ts => testAddDot(ts, ts)
 
   testAddDot([], ['0.'])
@@ -150,7 +148,7 @@ describe('function addDot', () => {
 
 
 describe('function flipSign', () => {
-  const testFlipSign = tester.bind(compute.flipSign)
+  const testFlipSign = tester.bind(flipSign)
   const testFlipSignNotChanged = ts => testFlipSign(ts, ts)
 
   testFlipSign(['-1'], ['1'])
